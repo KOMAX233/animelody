@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/animelos/static/css/main.d497b169.css",
+    "main.js": "/animelos/static/js/main.e0a12bae.js",
+    "static/js/453.8ab44547.chunk.js": "/animelos/static/js/453.8ab44547.chunk.js",
+    "index.html": "/animelos/index.html",
+    "main.d497b169.css.map": "/animelos/static/css/main.d497b169.css.map",
+    "main.e0a12bae.js.map": "/animelos/static/js/main.e0a12bae.js.map",
+    "453.8ab44547.chunk.js.map": "/animelos/static/js/453.8ab44547.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d497b169.css",
+    "static/js/main.e0a12bae.js"
+  ]
+}

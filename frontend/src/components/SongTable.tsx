@@ -33,7 +33,7 @@ const SongTable: React.FC<SongTableProps> = ({ username }) => {
         setLoading(true);
         setError(null);
         try {
-        const response = await fetch(`/api/user_anime_list?user_name=${username}`);
+        const response = await fetch('https://animelody.onrender.com' + `/api/user_anime_list?user_name=${username}`);
 
         if (!response.ok) {
             throw new Error('Failed to fetch user anime list');

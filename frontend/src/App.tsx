@@ -1,7 +1,9 @@
+import { useState } from 'react';
 import MALBox from './components/MALBox';
 import SongTable from './components/SongTable';
 
 function App() {
+  const [username, setUsername] = useState('');
   return (
     <div>
       <header className='p-4'>
@@ -13,8 +15,8 @@ function App() {
         </nav>
       </header>
       <main>
-        <MALBox></MALBox>
-        <SongTable></SongTable>
+            <MALBox setUsername={setUsername} />
+            <SongTable username={username} />
       </main>
     </div>
   );

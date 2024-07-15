@@ -30,24 +30,30 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.11.5'
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'npm'
 
-      - name: Install dependencies
+      - name: Install Node dependencies
         run: npm ci
 
-      - name: Build
-        env:
-          CLIENT_ID: ${{ secrets.CLIENT_ID }}
-          CLIENT_SECRET: ${{ secrets.CLIENT_SECRET }}
+      - name: Create .env file
         run: |
-          # Set the environment variables for the build process
-          echo "REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}" >> .env
+          echo "REACT_APP_CLIENT_ID=${{ secrets.CLIENT_ID }}" > .env
           echo "REACT_APP_CLIENT_SECRET=${{ secrets.CLIENT_SECRET }}" >> .env
-          npm run build
+
+      - name: Build
+        run: npm run build
 
       - name: Setup Pages
         uses: actions/configure-pages@v4

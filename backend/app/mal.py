@@ -6,7 +6,6 @@ from dotenv import load_dotenv
 load_dotenv()
 
 CLIENT_ID = os.getenv('CLIENT_ID')
-print(CLIENT_ID)
 CLIENT_SECRET = os.getenv('CLIENT_SECRET')
 
 api_bp = Blueprint('api', __name__)

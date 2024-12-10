@@ -7,9 +7,9 @@ import { CssBaseline } from "@mui/material";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Songs from "./components/Songs";
+import Home from "./components/Home";
 
 function App() {
-  const [username, setUsername] = useState("");
   return (
     <Router>
       <ThemeProvider theme={theme}>
@@ -23,11 +23,8 @@ function App() {
         </nav>
       </header> */}
           <ResponsiveAppBar />
-          <main>
-            <MALBox setUsername={setUsername} />
-            <SongTable username={username} />
-          </main>
           <Routes>
+            <Route path="/" element={<Home />}></Route>
             <Route path="/songs" element={<Songs />}></Route>
           </Routes>
         </div>

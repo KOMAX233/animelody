@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import sound from "../../public/audio/240127SilhouetteDance.m4a"
 
 const songs = [
   { title: 'Silhouette Dance', file: '/audio/240127SilhouetteDance.m4a' },

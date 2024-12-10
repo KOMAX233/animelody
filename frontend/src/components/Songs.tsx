@@ -1,5 +1,20 @@
 import { Button } from "@mui/material";
 import React, { useState, useRef } from "react";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Avatar,
+  IconButton,
+  Typography,
+  Paper,
+} from "@mui/material";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
+import PauseIcon from "@mui/icons-material/Pause";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const songs = [
   { title: "Silhouette Dance", file: "/audio/240127SilhouetteDance.m4a" },
@@ -31,15 +46,32 @@ const Songs = () => {
 
   return (
     <div>
-      <h1>Songs</h1>
-      <div>
-        {songs.map((song, index) => (
-          <div key={index}>
-            <button onClick={() => handlePlay(song.file)}>{song.title}</button>
-          </div>
-        ))}
-      </div>
-
+      <TableContainer>
+        <Table>
+          <TableHead>
+            <TableRow>
+              <TableCell>#</TableCell>
+              <TableCell>Title</TableCell>
+              <TableCell align="right">Duration?</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {songs.map((song, index) => (
+              <TableRow key={index}>
+                <TableCell>
+                  {index}
+                </TableCell>
+                <TableCell>
+                  <button onClick={() => handlePlay(song.file)}>
+                    {song.title}
+                  </button>
+                </TableCell>
+                <TableCell></TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </TableContainer>
       {currentSong && (
         <div>
           <h3>
@@ -52,7 +84,7 @@ const Songs = () => {
           </audio>
           <div>
             <Button onClick={toggleLoop}>
-              {isLooping? "Disable loop": "Enable loop"}
+              {isLooping ? "Disable loop" : "Enable loop"}
             </Button>
           </div>
         </div>

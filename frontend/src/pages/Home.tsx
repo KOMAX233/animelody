@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import SongTable from "./SongTable";
-import MALBox from "./MALBox";
+import SongTable from "../components/SongTable";
+import MALBox from "../components/MALBox";
 
 const Home = () => {
   const [username, setUsername] = useState("");

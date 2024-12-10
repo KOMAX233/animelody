@@ -7,11 +7,11 @@ import { CssBaseline } from "@mui/material";
 import ResponsiveAppBar from "./components/ResponsiveAppBar";
 import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import Songs from "./components/Songs";
-import Home from "./components/Home";
+import Home from "./pages/Home";
 
 function App() {
   return (
-    <Router>
+    <Router basename="/">
       <ThemeProvider theme={theme}>
         <CssBaseline />
         <div>

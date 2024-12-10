@@ -1,52 +1,55 @@
 import React, { useEffect, useState } from "react";
 
 interface Anime {
-    node: {
-        id: number;
-        title: string;
-        main_picture: {
-        large: string;
-        medium: string;
-        };
+  node: {
+    id: number;
+    title: string;
+    main_picture: {
+      large: string;
+      medium: string;
     };
+  };
 }
 
 interface AnimeListResponse {
-    anime_list: {
-        data: Anime[];
-        paging: {
-            next: string;
-        };
+  anime_list: {
+    data: Anime[];
+    paging: {
+      next: string;
     };
+  };
 }
 
 interface SongTableProps {
-    username: string;
+  username: string;
 }
 
 const SongTable: React.FC<SongTableProps> = ({ username }) => {
-    const [animeList, setAnimeList] = useState<Anime[]>([]);
-    const [error, setError] = useState<string | null>(null);
-    const [loading, setLoading] = useState<boolean>(false);
+  const [animeList, setAnimeList] = useState<Anime[]>([]);
+  const [error, setError] = useState<string | null>(null);
+  const [loading, setLoading] = useState<boolean>(false);
 
-    const fetchAnimeList = async () => {
-        setLoading(true);
-        setError(null);
-        try {
-        const response = await fetch('https://animelody.onrender.com' + `/api/user_anime_list?user_name=${username}`);
+  const fetchAnimeList = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      const response = await fetch(
+        "https://animelody.onrender.com" +
+          `/api/user_anime_list?user_name=${username}`,
+      );
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch user anime list');
-        }
+      if (!response.ok) {
+        throw new Error("Failed to fetch user anime list");
+      }
 
-        const data: AnimeListResponse = await response.json();
-        setAnimeList(data.anime_list.data || []);
-        setLoading(false);
-        } catch (error: any) {
-        console.error('Error fetching anime list:', error);
-        setError(error.message);
-        setLoading(false);
-        }
+      const data: AnimeListResponse = await response.json();
+      setAnimeList(data.anime_list.data || []);
+      setLoading(false);
+    } catch (error: any) {
+      console.error("Error fetching anime list:", error);
+      setError(error.message);
+      setLoading(false);
+    }
   };
 
   useEffect(() => {
@@ -79,7 +82,9 @@ const SongTable: React.FC<SongTableProps> = ({ username }) => {
         <tbody>
           {animeList.map((anime) => (
             <tr key={anime.node.id} className="hover:bg-gray-100">
-              <td className="border border-gray-300 px-4 py-2">{anime.node.title}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {anime.node.title}
+              </td>
               <td className="border border-gray-300 px-4 py-2">bamba</td>
             </tr>
           ))}

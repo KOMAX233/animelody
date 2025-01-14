@@ -1,4 +1,3 @@
-import { Button } from "@mui/material";
 import React, { useState, useRef } from "react";
 import {
   Table,
@@ -7,14 +6,10 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Avatar,
-  IconButton,
+  Button,
   Typography,
-  Paper,
 } from "@mui/material";
-import PlayArrowIcon from "@mui/icons-material/PlayArrow";
-import PauseIcon from "@mui/icons-material/Pause";
-import MoreVertIcon from "@mui/icons-material/MoreVert";
+import ProgressBar from "./ProgressBar";
 
 const songs = [
   {
@@ -81,21 +76,38 @@ const songs = [
 
 const Songs = () => {
   const [currentSong, setCurrentSong] = useState<string | null>(null);
-  const [isLooping, setIsLooping] = useState<boolean>(false);
+  const [progress, setProgress] = useState<number>(0);
   const audioRef = useRef<HTMLAudioElement>(null);
 
   const handlePlay = (file: string) => {
     setCurrentSong(file);
     if (audioRef.current) {
+      audioRef.current.src = file;
       audioRef.current.load();
       audioRef.current.play();
     }
   };
 
-  const toggleLoop = () => {
-    setIsLooping((prev) => !prev);
+  const handleTimeUpdate = () => {
     if (audioRef.current) {
-      audioRef.current.loop = !isLooping;
+      const current = audioRef.current.currentTime;
+      const duration = audioRef.current.duration;
+      setProgress((current / duration) * 100);
+    }
+  };
+
+  const handleSeek = (percentage: number) => {
+    if (audioRef.current && audioRef.current.duration) {
+      const newTime = (percentage / 100) * audioRef.current.duration;
+      if (!isNaN(newTime) && isFinite(newTime)) {
+        audioRef.current.currentTime = newTime;
+      } else {
+        console.error("Invalid time value:", newTime);
+      }
+    } else {
+      console.error(
+        "Audio duration is not available or audio element is null.",
+      );
     }
   };
 
@@ -107,17 +119,15 @@ const Songs = () => {
             <TableRow>
               <TableCell>#</TableCell>
               <TableCell>Title</TableCell>
-              <TableCell>Uploader</TableCell>
-              <TableCell>Original Artist</TableCell>
+              <TableCell>Artist</TableCell>
               <TableCell>Source</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
             {songs.map((song, index) => (
               <TableRow key={index} onClick={() => handlePlay(song.file)}>
-                <TableCell>{index}</TableCell>
+                <TableCell>{index + 1}</TableCell>
                 <TableCell>{song.title}</TableCell>
-                <TableCell>?</TableCell>
                 <TableCell>{song.artist}</TableCell>
                 <TableCell>{song.source}</TableCell>
               </TableRow>
@@ -127,19 +137,12 @@ const Songs = () => {
       </TableContainer>
       {currentSong && (
         <div>
-          <h3>
+          <Typography variant="h6">
             Now Playing:{" "}
             {songs.find((song) => song.file === currentSong)?.title}
-          </h3>
-          <audio ref={audioRef} controls autoPlay>
-            <source src={currentSong} type="audio/mpeg" />
-            Your browser does not support the audio element.
-          </audio>
-          <div>
-            <Button onClick={toggleLoop}>
-              {isLooping ? "Disable loop" : "Enable loop"}
-            </Button>
-          </div>
+          </Typography>
+          <audio ref={audioRef} onTimeUpdate={handleTimeUpdate} />
+          <ProgressBar progress={progress} onSeek={handleSeek} />
         </div>
       )}
     </div>

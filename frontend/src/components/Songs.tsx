@@ -18,6 +18,12 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 
 const songs = [
   {
+    title: "Closing",
+    file: "/audio/250113closing.m4a",
+    artist: "Touma Kazusa",
+    source: "White Album 2 CODA Kazusa True ED",
+  },
+  {
     title: "Silhouette Dance",
     file: "/audio/240127SilhouetteDance.m4a",
     artist: "MyGO!!!!!",

@@ -13,6 +13,12 @@ import ProgressBar from "./ProgressBar";
 
 const songs = [
   {
+    title: "Wings of Courage -sora wo koete",
+    file: "/audio/250120wings.m4a",
+    artist: "Kawada Mami",
+    source: "Ao no Kanata no Four Rhythm",
+  },
+  {
     title: "Closing",
     file: "/audio/250113closing.m4a",
     artist: "Touma Kazusa",
